@@ -27,8 +27,12 @@ st.set_page_config(
     layout="wide",
 )
 
+from pathlib import Path
+
 RANDOM_STATE = 42
-DATA_PATH = "European_Bank.csv"
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / "data" / "European_Bank.csv"
 
 NUMERIC_FEATURES = [
     "CreditScore", "Age", "Tenure", "Balance", "NumOfProducts", "EstimatedSalary",
@@ -41,7 +45,32 @@ NUMERIC_FEATURES = [
 # --------------------------------------------------------------------------
 @st.cache_data
 def load_raw_data(path):
-    return pd.read_csv(path)
+    path = Path(path)
+
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Dataset not found: {path}. "
+            "Check that data/European_Bank.csv "
+            "is committed to GitHub."
+        )
+
+    df = pd.read_csv(path)
+
+    required_columns = [
+        "CreditScore", "Geography", "Gender", "Age",
+        "Tenure", "Balance", "NumOfProducts",
+        "HasCrCard", "IsActiveMember",
+        "EstimatedSalary", "Exited"
+    ]
+
+    missing = [c for c in required_columns if c not in df.columns]
+
+    if missing:
+        raise ValueError(
+            f"Dataset is missing required columns: {missing}"
+        )
+
+    return df
 
 
 def engineer_features(row_df):
