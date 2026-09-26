@@ -1,0 +1,42 @@
+
+## Churn Risk Segments Report for Marketing Team
+
+**To:** Marketing Team
+
+**From:** Data Science Team
+
+**Date:** [Current Date]
+
+**Subject:** Key Churn Risk Segments Identified by Churn Prediction Model
+
+--- 
+
+### Executive Summary
+
+Our churn prediction project successfully developed a **Gradient Boosting Model** with a strong ROC-AUC score. This model provides valuable insights into the factors driving customer churn, allowing for a proactive and targeted approach to retention. The analysis identified specific customer segments at higher risk of churning, which your team can leverage to design effective marketing and retention campaigns.
+
+### Key Churn Risk Segments & Recommended Actions
+
+Based on the model's feature importance (SHAP values and Permutation Importance), the following customer segments exhibit the highest risk of churn:
+
+1.  **Customers with Multiple Products (`NumOfProducts`)**
+    *   **Insight:** This is the most significant predictor of churn. Customers holding more products are substantially more likely to churn.
+    *   **Marketing Implications:** Investigate potential friction points or complexities associated with managing multiple products. Marketing efforts could focus on simplifying product experiences, offering consolidated management tools, or providing tailored benefits for multi-product customers. Proactive outreach to these customers is crucial.
+
+2.  **Older Customers (`Age`)**
+    *   **Insight:** Age significantly influences churn, with older customers showing a higher propensity to leave.
+    *   **Marketing Implications:** Develop age-specific retention programs tailored to older demographics' unique financial needs (e.g. retirement planning, wealth management, legacy services).
+
+3.  **Customers in Germany (`Geography_Germany`)**
+    *   **Insight:** Customers residing in Germany exhibit a higher churn risk compared to other regions.
+    *   **Marketing Implications:** Conduct a deep dive into the German market to understand local competitive pressures, customer preferences, or dissatisfaction triggers.
+
+### Secondary Risk Factors
+
+*   **`Gender_Male`:** Male customers show a slightly higher propensity to churn.
+*   **`BalanceSalaryRatio`:** Imbalances or changes in this ratio can indicate financial stress or disengagement.
+*   **`IsActiveMember`:** Less active members are, unsurprisingly, more likely to churn.
+
+### Call to Action
+
+We recommend using the developed Gradient Boosting model to regularly identify high-risk customers, and implementing personalized offers, proactive communication, and feedback loops for at-risk segments.
